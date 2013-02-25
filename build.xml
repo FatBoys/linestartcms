@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?> 
 <project name="cms" default="war">
 	<path id="compile.class.path">
 		<fileset dir="./lib">
@@ -7,14 +8,22 @@
 	
 	<target name="compile">
 		<mkdir dir="./class"/>
-		<javac srcdir="./src" destdir="./class" classpathref="compile.class.path" debug="yes"/>
+		<javac srcdir="./src" destdir="./class" classpathref="compile.class.path" debug="yes" encoding="UTF-8"/>
 	</target>
 	
 	<target name="war" depends="compile">
 		<copy todir="./temp">
 			<fileset dir=".">
 				<exclude name="**build.xml"/>
-				<exclude name="**/lib/**"/>
+				<exclude name="./lib"/>
+				<exclude name="**/.settings/**"/>
+				<exclude name="**/bin/**"/>
+				<exclude name="**/sql/**"/>
+				<exclude name="**/src/**"/>
+				<exclude name="**/unittest/**"/>
+				<exclude name="**.classpath**"/>
+				<exclude name="**.project**"/>
+				<exclude name="**cms.war**"/>
 			</fileset>
 		</copy>
 		<jar jarfile="./temp/WEB-INF/lib/cms.jar" basedir="./class"/>
